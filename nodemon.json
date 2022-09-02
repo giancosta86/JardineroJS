@@ -1,0 +1,10 @@
+{
+  "watch": "src",
+  "ext": "ts,tsx,json",
+  "ignore": ["**/*.test.*", "/test/"],
+  "env": {
+    "NODE_ENV": "development",
+    "NODE_OPTIONS": "-r ts-node/register --no-warnings"
+  },
+  "exec": "ts-node src/main.ts @giancosta86/cervantes"
+}

@@ -1,0 +1,1 @@
+export { DictionaryPipeline } from "./DictionaryPipeline";
