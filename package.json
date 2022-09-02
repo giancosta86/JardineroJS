@@ -1,6 +1,6 @@
 {
   "name": "@giancosta86/jardinero",
-  "version": "1.0.0-rc.8",
+  "version": "1.0.0",
   "description": "Extensible web stack in TypeScript for exploring natural languages",
   "keywords": [
     "web",
