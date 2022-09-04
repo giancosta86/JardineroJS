@@ -4,6 +4,7 @@ import { stat, mkdir } from "node:fs/promises";
 import { DataSet, DictionaryStatus } from "@giancosta86/jardinero-frontend";
 import { PromiseAgent } from "@giancosta86/worker-agent";
 import { formatError } from "@giancosta86/format-error";
+import { LinguisticPlugin } from "@giancosta86/jardinero-sdk";
 import { DbOperationInput, DbOperationOutput } from "./protocol";
 import { filteredConsole } from "../environment";
 import { LinguisticPluginDescriptor } from "../plugin";
@@ -13,6 +14,7 @@ const operationModuleId = join(__dirname, "operation");
 
 export class Dictionary {
   private readonly dbPath: string;
+  private readonly plugin: LinguisticPlugin;
 
   public readonly pipeline: DictionaryPipeline;
 
@@ -22,6 +24,8 @@ export class Dictionary {
   >(operationModuleId);
 
   constructor(pluginDescriptor: LinguisticPluginDescriptor) {
+    this.plugin = pluginDescriptor.plugin;
+
     this.dbPath = join(
       homedir(),
       ".jardinero",
@@ -58,10 +62,12 @@ export class Dictionary {
   }
 
   async executeQuery(query: string): Promise<DataSet> {
+    const sqlQuery = await this.plugin.translateQueryToSql(query);
+
     const dbOperationOutput = await this.agent.runOperation({
       type: "executeQuery",
       dbPath: this.dbPath,
-      query
+      query: sqlQuery
     });
 
     if (dbOperationOutput.type != "queryResult") {

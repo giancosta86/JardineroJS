@@ -339,10 +339,10 @@
     serve-static "^1.15.0"
     socket.io-client "^4.4.1"
 
-"@giancosta86/jardinero-sdk@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@giancosta86/jardinero-sdk/-/jardinero-sdk-1.0.0.tgz#028135fac802083a56f649318b42de716b69866b"
-  integrity sha512-iwBeyTH17KXRURP/FZuM8eYAnYJjUiHy7wotG3YQ9WgXIY8gsAQ/GAaZYzgemjf1jMBL7Pwz58PHFhOVUtJXQQ==
+"@giancosta86/jardinero-sdk@^1.0.0", "@giancosta86/jardinero-sdk@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@giancosta86/jardinero-sdk/-/jardinero-sdk-1.1.0.tgz#b236eb269489efa198ac228b9de57a2b77dc0f8c"
+  integrity sha512-6jPJ52lVELjgQOatIsA1whdtT405vxiwrgaf2fo1MPU0/1dsRRG9vFnNSW+Bm+QLuGzZ5xCIccL3wIQbfkwUFA==
   dependencies:
     "@giancosta86/flatten-transform" "^1.0.0"
     "@giancosta86/format-error" "^1.0.1"

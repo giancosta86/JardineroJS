@@ -1,6 +1,6 @@
 {
   "name": "@giancosta86/jardinero",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Extensible web stack in TypeScript for exploring natural languages",
   "keywords": [
     "web",
@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "@giancosta86/jardinero-frontend": "^4.0.0",
-    "@giancosta86/jardinero-sdk": "^1.0.0",
+    "@giancosta86/jardinero-sdk": "^1.1.0",
     "express": "^4.18.1",
     "rimraf": "^3.0.2",
     "socket.io": "^4.5.1",
