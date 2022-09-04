@@ -2,10 +2,11 @@
 
 import process, { argv } from "node:process";
 import { createServer } from "node:http";
+import open from "open";
 import { formatError } from "@giancosta86/format-error";
 import { createBrowserApp } from "./browser";
 import { enableWebSocket } from "./sockets";
-import { filteredConsole, PORT } from "./environment";
+import { filteredConsole, IN_PRODUCTION, PORT } from "./environment";
 import { Dictionary } from "./dictionary";
 import { loadLinguisticPlugin } from "./plugin";
 
@@ -31,9 +32,15 @@ function main(args: readonly string[]): number {
     });
 
     server.listen(PORT, () => {
+      const url = `http://localhost:${PORT}`;
+
       console.info("Welcome to 🌹JardineroJS! 🤗🦋");
       console.info();
-      console.info(`Server listening at http://localhost:${PORT}`);
+      console.info(`Server listening at -> ${url}`);
+
+      if (IN_PRODUCTION) {
+        open(url);
+      }
     });
 
     return 0;
