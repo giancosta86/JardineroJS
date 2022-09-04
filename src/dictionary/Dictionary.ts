@@ -62,7 +62,7 @@ export class Dictionary {
   }
 
   async executeQuery(query: string): Promise<DataSet> {
-    const sqlQuery = await this.plugin.translateQueryToSql(query);
+    const sqlQuery = (await this.plugin.translateQueryToSql?.(query)) ?? query;
 
     const dbOperationOutput = await this.agent.runOperation({
       type: "executeQuery",
