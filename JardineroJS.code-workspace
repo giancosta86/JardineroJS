@@ -6,47 +6,55 @@
     },
     {
       "name": "CervantesJS",
-      "path": "..\\CervantesJS"
+      "path": "../CervantesJS"
+    },
+    {
+      "name": "RayonJS",
+      "path": "../RayonJS"
     },
     {
       "name": "JardineroJS-sdk",
-      "path": "..\\JardineroJS-sdk"
+      "path": "../JardineroJS-sdk"
     },
     {
       "name": "jardinero-frontend",
-      "path": "..\\jardinero-frontend"
+      "path": "../jardinero-frontend"
+    },
+    {
+      "name": "stream-utils",
+      "path": "../stream-utils"
     },
     {
       "name": "wiki-transform",
-      "path": "..\\wiki-transform"
+      "path": "../wiki-transform"
     },
     {
       "name": "worker-transform",
-      "path": "..\\worker-transform"
+      "path": "../worker-transform"
     },
     {
       "name": "sqlite-writable",
-      "path": "..\\sqlite-writable"
+      "path": "../sqlite-writable"
     },
     {
       "name": "worker-agent",
-      "path": "..\\worker-agent"
+      "path": "../worker-agent"
     },
     {
       "name": "flatten-transform",
-      "path": "..\\flatten-transform"
+      "path": "../flatten-transform"
     },
     {
       "name": "format-error",
-      "path": "..\\format-error"
+      "path": "../format-error"
     },
     {
       "name": "unified-logging",
-      "path": "..\\unified-logging"
+      "path": "../unified-logging"
     },
     {
       "name": "typed-env",
-      "path": "..\\typed-env"
+      "path": "../typed-env"
     }
   ],
   "settings": {}

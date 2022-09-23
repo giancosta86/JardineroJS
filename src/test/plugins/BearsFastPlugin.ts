@@ -4,7 +4,7 @@ import { bearToWikiXml } from "../wiki";
 import { BearsPlugin } from "./BearsPlugin";
 
 class BearsFastPlugin extends BearsPlugin {
-  createSourceStreams(): Readable {
+  createBearReadable(): Readable {
     return Readable.from([bearToWikiXml(yogi), bearToWikiXml(bubu)]);
   }
 }

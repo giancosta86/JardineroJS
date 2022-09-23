@@ -4,7 +4,7 @@ import { BearsPlugin } from "./BearsPlugin";
 class BearsKaboomPlugin extends BearsPlugin {
   static readonly message = "--- KABOOM! ---";
 
-  override createSourceStreams(): Readable {
+  protected override createBearReadable(): Readable {
     throw new Error(BearsKaboomPlugin.message);
   }
 }

@@ -4,7 +4,7 @@ import { bearToWikiXmlWithDelay } from "../wiki";
 import { BearsPlugin } from "./BearsPlugin";
 
 class BearsSlowPlugin extends BearsPlugin {
-  override createSourceStreams(): Readable {
+  protected override createBearReadable(): Readable {
     return Readable.from([
       bearToWikiXmlWithDelay(yogi),
       bearToWikiXmlWithDelay(bubu)

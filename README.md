@@ -8,9 +8,11 @@ _Extensible web stack in TypeScript for exploring natural languages_
 
 ![Screenshot](docs/screenshots/pipeline.png)
 
-🌹**JardineroJS** is a hyper-performant architecture for **NodeJS**, entirely written in **TypeScript**, with a frontend enabling users to:
+🌹**JardineroJS** is a web architecture, based on **NodeJS**, focused on _building SQL-based dictionaries_ for the _analysis of natural languages_.
 
-- create subsequent versions of a _custom dictionary_, by _extracting terms_ from a set of _wiki pages_ - such as Wiktionary - and storing the data into a _SQLite database_
+It is entirely written in **TypeScript**, with a frontend enabling users to:
+
+- create subsequent versions of _custom dictionaries_, by _extracting terms_ from a set of arbitrary _input pages_ - such as Wiktionary - and storing the data into _SQLite databases_
 
 - perform _sophisticated queries_, in order to explore a wide variety of linguistic aspects of the newly-created dictionary - especially in the domain of _morphology_
 
@@ -18,13 +20,13 @@ The architecture is designed to be fully extensible - via **plugins**, that are 
 
 - how to _extract terms_ from an _arbitrary source_
 
-- how to insert the terms into _SQL tables_ - and how to retrieve them
+- how to insert the terms into _SQL tables_ - and how to retrieve them: every plugin has _its own SQLite database_
 
 Furthermore, plugins can be created quite easily, via the open source [JardineroJS-sdk](https://github.com/giancosta86/JardineroJS-sdk).
 
 ## Installation
 
-JardineroJS has been tested with NodeJS 16 LTS.
+JardineroJS has been tested with NodeJS 16 LTS and NodeJS 18.
 
 It should be installed as a **global package**; in particular:
 
@@ -70,6 +72,18 @@ or
 yarn global add @giancosta86/cervantes
 ```
 
+Similarly, if you want to install [RayonJS](https://github.com/giancosta86/RayonJS) - the plugin for exploring the **French language** - you can run:
+
+```bash
+npm i -g @giancosta86/rayon
+```
+
+or
+
+```bash
+yarn global add @giancosta86/rayon
+```
+
 > As a matter of fact, JardineroJS only requires _the module_ exporting the plugin class - as explained in the [JardineroJS-sdk](https://github.com/giancosta86/JardineroJS-sdk) documentation: consequently, if you are a plugin developer, you only need the compiled .js files within your plugin project directory - with no need for packaging.
 
 ### Running a plugin
@@ -92,16 +106,18 @@ For example, to start JardineroJS after installing the **@giancosta86/cervantes*
 jardinero "$(yarn global dir)/node_modules/@giancosta86/cervantes"
 ```
 
-> As a matter of fact, Jardinero only requires the _module id_ (which can be the file system path) of the module exporting the linguistic plugin, as expected by the `resolve()` function and in the way described by the [JardineroJS-sdk](https://github.com/giancosta86/JardineroJS-sdk) project.
+Similarly, to run the **@giancosta86/rayon** plugin for French, you should execute this command:
+
+```bash
+jardinero "$(yarn global dir)/node_modules/@giancosta86/rayon"
+```
+
+> More technically, Jardinero only requires the _module id_ (which can be the file-system path) of the module exporting the linguistic plugin, as expected by the `resolve()` function and in the way described by the [JardineroJS-sdk](https://github.com/giancosta86/JardineroJS-sdk) project.
 > In particular, if you are a plugin developer, you can simply pass the path to the compiled .js file of your plugin module, to test it before packaging.
 
 ## Developing custom plugins
 
 Creating a plugin for JardineroJS is as easy as extending an abstract class - and documented in detail by the open source [JardineroJS-sdk](https://github.com/giancosta86/JardineroJS-sdk) project.
-
-### Environment variables
-
-For very sophisticated usages, JardineroJS can be customized via environment variables: feel free to explore them in the [related source file](src/environment.ts).
 
 ## A vast architecture of TypeScript projects
 
@@ -113,9 +129,13 @@ The complete list of the remanining NPM packages in the JardineroJS architecture
 
 - [CervantesJS](https://github.com/giancosta86/CervantesJS)
 
+- [RayonJS](https://github.com/giancosta86/RayonJS)
+
 - [JardineroJS - SDK](https://github.com/giancosta86/JardineroJS-sdk)
 
 - [Jardinero - Frontend](https://github.com/giancosta86/jardinero-frontend)
+
+- [stream-utils](https://github.com/giancosta86/stream-utils)
 
 - [wiki-transform](https://github.com/giancosta86/wiki-transform)
 

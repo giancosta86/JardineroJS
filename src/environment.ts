@@ -9,9 +9,8 @@ export const FRONTEND_SERVER_URL = getEnvString(
   "http://localhost:8080"
 );
 
-export const PAGE_BATCH_SIZE = getEnvNumber("JARDINERO_PAGE_BATCH_SIZE", 1492);
-
 export const IN_PRODUCTION = isInProduction(true);
 
-export const filteredConsole = new FilterLogger(console);
-filteredConsole.logLevel = IN_PRODUCTION ? LogLevel.Error : LogLevel.Warn;
+export const filteredConsole = new FilterLogger(console).setLevel(
+  IN_PRODUCTION ? LogLevel.Error : LogLevel.Info
+);

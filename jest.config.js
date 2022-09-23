@@ -5,5 +5,7 @@ module.exports = {
 
   testPathIgnorePatterns: ["<rootDir>/dist/", "/_.+"],
 
+  setupFilesAfterEnv: ["jest-extended/all"],
+
   maxWorkers: 1
 };

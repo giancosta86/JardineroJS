@@ -1,6 +1,6 @@
 {
   "name": "@giancosta86/jardinero",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "description": "Extensible web stack in TypeScript for exploring natural languages",
   "keywords": [
     "web",
@@ -50,8 +50,8 @@
     "start:prod": "node dist/main @giancosta86/cervantes"
   },
   "dependencies": {
-    "@giancosta86/jardinero-frontend": "^4.0.0",
-    "@giancosta86/jardinero-sdk": "^1.1.0",
+    "@giancosta86/jardinero-frontend": "^5.0.2",
+    "@giancosta86/jardinero-sdk": "^2.0.0",
     "express": "^4.18.1",
     "open": "^8.4.0",
     "rimraf": "^3.0.2",
@@ -60,7 +60,8 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@giancosta86/cervantes": "^1.0.0",
+    "@giancosta86/cervantes": "^2.0.0",
+    "@giancosta86/rayon": "^1.0.0",
     "@swc/core": "^1.2.215",
     "@swc/jest": "^0.2.21",
     "@types/better-sqlite3": "^7.5.0",
@@ -78,10 +79,12 @@
     "eslint": "^8.22.0",
     "http-server": "^14.1.1",
     "jest": "^28.1.3",
+    "jest-extended": "^3.1.0",
     "nodemon": "^2.0.16",
     "prettier": "^2.7.1",
     "ts-node": "^10.8.1",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "wait-on": "^6.0.1"
   },
   "engines": {
     "node": ">=16.16.0"

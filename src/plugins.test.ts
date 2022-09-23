@@ -1,10 +1,14 @@
 import { join } from "node:path";
-import { loadLinguisticPlugin } from "./plugin";
+import { LoggerPipelineOutput } from "@giancosta86/jardinero-sdk";
+import { loadLinguisticPlugin } from "./plugins";
 
 describe("The plugin system", () => {
   it("should load CervantesJS", () => {
     const moduleId = "@giancosta86/cervantes";
-    const pluginDescriptor = loadLinguisticPlugin(moduleId);
+    const pluginDescriptor = loadLinguisticPlugin(
+      moduleId,
+      new LoggerPipelineOutput(console)
+    );
 
     expect(pluginDescriptor.moduleId).toBe(moduleId);
 
@@ -17,7 +21,7 @@ describe("The plugin system", () => {
     const moduleId = join(__dirname, "environment");
 
     expect(() => {
-      loadLinguisticPlugin(moduleId);
+      loadLinguisticPlugin(moduleId, new LoggerPipelineOutput(console));
     }).toThrow(`No 'default' export found in module '${moduleId}'`);
   });
 });

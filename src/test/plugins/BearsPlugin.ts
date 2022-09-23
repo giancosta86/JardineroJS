@@ -1,10 +1,15 @@
 import { rename, mkdir } from "node:fs/promises";
 import { join } from "node:path";
 import { homedir } from "node:os";
-import { Transform } from "node:stream";
-import { LinguisticPlugin } from "@giancosta86/jardinero-sdk";
+import { Readable, Transform } from "node:stream";
+import {
+  LoggerPipelineOutput,
+  LinguisticPlugin,
+  PipelineOutput
+} from "@giancosta86/jardinero-sdk";
 import { SqliteWritableBuilder } from "@giancosta86/sqlite-writable";
 import { Logger } from "@giancosta86/unified-logging";
+import { WikiTransform } from "@giancosta86/wiki-transform";
 import { PageToBearTransform } from "../wiki";
 import {
   BearsDb,
@@ -12,10 +17,13 @@ import {
   createBearsWritableBuilder,
   withBearsDb
 } from "../db";
-import { LinguisticPluginDescriptor } from "../../plugin";
+import { LinguisticPluginDescriptor } from "../../plugins";
 import { rimraf } from "../../fileUtils";
 
-export type BearsPluginClass<T extends BearsPlugin> = new (logger: Logger) => T;
+export type BearsPluginClass<T extends BearsPlugin> = new (
+  logger: Logger,
+  pipelineOutput: PipelineOutput
+) => T;
 
 export abstract class BearsPlugin extends LinguisticPlugin {
   private static readonly id = "info.gianlucacosta.jardinero.test.bears";
@@ -43,7 +51,7 @@ export abstract class BearsPlugin extends LinguisticPlugin {
 
     return {
       moduleId,
-      plugin: new pluginClass(console)
+      plugin: new pluginClass(console, new LoggerPipelineOutput(console))
     };
   }
 
@@ -63,12 +71,22 @@ export abstract class BearsPlugin extends LinguisticPlugin {
     return BearsPlugin.id;
   }
 
+  getName(): string {
+    return "Yellowstone Plugin";
+  }
+
   getSqliteSchema(): string {
     return BEARS_SCHEMA;
   }
 
-  createPageTransforms(): Transform {
-    return new PageToBearTransform();
+  protected abstract createBearReadable(): Readable;
+
+  createSourceStreams(): Readable {
+    return this.createBearReadable();
+  }
+
+  createExtractionTransforms(): readonly Transform[] {
+    return [new WikiTransform(), new PageToBearTransform()];
   }
 
   createSqliteWritableBuilder(): SqliteWritableBuilder {

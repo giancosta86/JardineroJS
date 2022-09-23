@@ -3,12 +3,13 @@
 import process, { argv } from "node:process";
 import { createServer } from "node:http";
 import open from "open";
-import { formatError } from "@giancosta86/format-error";
+import { formatError, ErrorParts } from "@giancosta86/format-error";
+import { LoggerPipelineOutput } from "@giancosta86/jardinero-sdk";
 import { createBrowserApp } from "./browser";
-import { enableWebSocket } from "./sockets";
+import { setupWebSockets } from "./websockets";
 import { filteredConsole, IN_PRODUCTION, PORT } from "./environment";
 import { Dictionary } from "./dictionary";
-import { loadLinguisticPlugin } from "./plugin";
+import { loadLinguisticPlugin } from "./plugins";
 
 function main(args: readonly string[]): number {
   const linguisticModuleId = args[0];
@@ -20,18 +21,22 @@ function main(args: readonly string[]): number {
   }
 
   try {
-    const pluginDescriptor = loadLinguisticPlugin(linguisticModuleId);
+    const pluginDescriptor = loadLinguisticPlugin(
+      linguisticModuleId,
+      new LoggerPipelineOutput(filteredConsole)
+    );
     const dictionary = new Dictionary(pluginDescriptor);
 
     const app = createBrowserApp();
-    const server = createServer(app);
+    const httpServer = createServer(app);
 
-    enableWebSocket({
-      server,
-      dictionary
+    setupWebSockets({
+      httpServer,
+      dictionary,
+      plugin: pluginDescriptor.plugin
     });
 
-    server.listen(PORT, () => {
+    httpServer.listen(PORT, () => {
       const url = `http://localhost:${PORT}`;
 
       console.info("Welcome to 🌹JardineroJS! 🤗🦋");
@@ -45,7 +50,7 @@ function main(args: readonly string[]): number {
 
     return 0;
   } catch (err) {
-    filteredConsole.error(formatError(err, { showCauseChain: true }));
+    filteredConsole.error(formatError(err, ErrorParts.Main));
     return 1;
   }
 }

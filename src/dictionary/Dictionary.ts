@@ -3,11 +3,11 @@ import { homedir } from "node:os";
 import { stat, mkdir } from "node:fs/promises";
 import { DataSet, DictionaryStatus } from "@giancosta86/jardinero-frontend";
 import { PromiseAgent } from "@giancosta86/worker-agent";
-import { formatError } from "@giancosta86/format-error";
+import { formatError, ErrorParts } from "@giancosta86/format-error";
 import { LinguisticPlugin } from "@giancosta86/jardinero-sdk";
 import { DbOperationInput, DbOperationOutput } from "./protocol";
 import { filteredConsole } from "../environment";
-import { LinguisticPluginDescriptor } from "../plugin";
+import { LinguisticPluginDescriptor } from "../plugins";
 import { DictionaryPipeline } from "./pipeline";
 
 const operationModuleId = join(__dirname, "operation");
@@ -46,7 +46,7 @@ export class Dictionary {
       statusMessage,
       pipelineMessage: this.pipeline.latestTextMessage ?? null,
       errorInPreviousPipeline: this.pipeline.latestError
-        ? formatError(this.pipeline.latestError, { showClass: false })
+        ? formatError(this.pipeline.latestError, ErrorParts.Message)
         : null
     };
   }

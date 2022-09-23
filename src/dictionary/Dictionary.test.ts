@@ -80,7 +80,7 @@ describe("Dictionary", () => {
     });
   });
 
-  describe("the status", () => {
+  describe("status", () => {
     describe("upon creation", () => {
       describe("when the underlying db is missing", () => {
         it("should have no message", async () => {
